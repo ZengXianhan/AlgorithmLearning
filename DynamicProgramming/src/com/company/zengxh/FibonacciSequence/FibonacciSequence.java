@@ -20,4 +20,29 @@ public class FibonacciSequence {
         memo.set(n,memoHelper(memo, n-1) + memoHelper(memo,n-2));
         return memo.get(n);
     }
+
+    public static int dpTableBasic(int N){
+        if(N < 0) {return 0;}
+        if(N == 1) {return 1;}
+        Vector<Integer> dp = new Vector<>(N+1, 0);
+        dp[0] = 0;
+        dp[1] = dp[2] = 1;
+        for(int i=3; i<= N; i++){
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[N];
+    }
+
+    public static int dpTableOptimized(int N){
+        if(N < 0) {return 0;}
+        if(N == 1) {return 1;}
+        int dpPre = 1;
+        int dpCurr = 1;
+        for(int i=3; i<= N; i++){
+            int dpNext = dpCurr + dpPre;
+            dpCurr = dpPre;
+            dpNext = dpCurr;
+        }
+        return dpCurr;
+    }
 }
