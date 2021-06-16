@@ -2,6 +2,9 @@ package com.company.zengxh.FibonacciSequence;
 
 import java.util.Vector;
 
+/**
+ * @author xianhan.zeng
+ */
 public class FibonacciSequence {
     public static int ViolentRecursion(int N) {
         if(N==1 || N==2) { return 1; }
@@ -25,12 +28,13 @@ public class FibonacciSequence {
         if(N < 0) {return 0;}
         if(N == 1) {return 1;}
         Vector<Integer> dp = new Vector<>(N+1, 0);
-        dp[0] = 0;
-        dp[1] = dp[2] = 1;
+        dp.set(0,0);
+        dp.set(1,1);
+        dp.set(2,1);
         for(int i=3; i<= N; i++){
-            dp[i] = dp[i-1] + dp[i-2];
+            dp.set(i,dp.get(i-1) + dp.get(i-2));
         }
-        return dp[N];
+        return dp.get(N);
     }
 
     public static int dpTableOptimized(int N){
@@ -40,8 +44,8 @@ public class FibonacciSequence {
         int dpCurr = 1;
         for(int i=3; i<= N; i++){
             int dpNext = dpCurr + dpPre;
-            dpCurr = dpPre;
-            dpNext = dpCurr;
+            dpPre = dpCurr;
+            dpCurr = dpNext;
         }
         return dpCurr;
     }
